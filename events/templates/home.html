@@ -8,14 +8,12 @@
 			<h2 class="masthead-subheading mb-0">You could ever want...</h2>
 			{% if request.user.is_anonymous %}
 				<a href="{% url 'signup' %}" class="btn btn-primary btn-xl rounded-pill mt-5">Sign up to find events!</a>
-			{% else %}
-				<a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Find events!</a>
 			{% endif %}
 		</div>
 
 		<div class="container mt-3">
 			{% if request.user.is_authenticated %}
-				<a href="{% url 'event-list' %}" class="btn btn-primary btn-xl  rounded-pill mt-5">View all event</a>
+				<a href="{% url 'event-list' %}" class="btn btn-primary btn-xl  rounded-pill mt-5"><h5>View all event</h5></a>
 			{% endif %}
 		</div>
 
@@ -29,6 +27,12 @@
 	<div class="bg-circle-2 bg-circle"></div>
 	<div class="bg-circle-3 bg-circle"></div>
 	<div class="bg-circle-4 bg-circle"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 </header>
 
 

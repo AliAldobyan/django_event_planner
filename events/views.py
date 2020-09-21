@@ -5,7 +5,7 @@ from django.views import View
 from datetime import datetime
 
 from .models import Event, Booking
-from .forms import UserSignup, UserLogin, EventForm
+from .forms import UserSignup, UserLogin, EventForm, BookingForm
 
 def home(request):
 	return render(request, 'home.html')
@@ -70,6 +70,31 @@ def event_create(request):
 	return render(request, 'event_create.html', context)
 
 
+def event_book(request,event_id):
+    form = BookingForm()
+    event = Event.objects.get(id=event_id)
+
+    if request.user.is_anonymous:
+        return redirect('login')
+
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit = False)
+            booking.user = request.user
+            booking.event= event
+            booking.save()
+            messages.success(request , "You Have Successfully Booked An Event.")
+            return redirect("event-list")
+
+    context = {
+    "event" : event,
+    "form" :form,
+    }
+
+    return render(request,'event_book.html',context)
+
+
 def event_update(request,event_id):
 	event_obj = Event.objects.get(id=event_id)
 	if request.user != event_obj.organizer:
@@ -86,7 +111,6 @@ def event_update(request,event_id):
 		"event": event_obj
 	}
 	return render(request, 'event_update.html', context)
-
 
 def event_delete(request,event_id):
 	event = Event.objects.get(id = event_id)

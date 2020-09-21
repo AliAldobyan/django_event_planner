@@ -5,10 +5,19 @@
 	<div class="masthead-content">
 		<div class="container">
 
-				<div class="row">
-				 <div class="col-auto mr-auto"><h2 >Events I Organized:</h2></div>
-				 <div class="col-auto"><a href="{% url 'event-create' %}" class="btn btn-dark btn-lg rounded-pill mt-1">Create Event</a></div>
-			 </div>
+
+					<div class="row">
+						{% if not events %}
+							<div class="col-auto mr-auto"><h2 >NO Events Organized by you, Join us and Create One!</h2></div>
+							<div class="col-auto"><a href="{% url 'event-create' %}" class="btn btn-dark btn-lg rounded-pill mt-1">Create Event</a></div>
+
+						{% else %}
+						 	<div class="col-auto mr-auto"><h2 >Events I Organized:</h2></div>
+
+						 <div class="col-auto"><a href="{% url 'event-create' %}" class="btn btn-dark btn-lg rounded-pill mt-1">Create Event</a></div>
+
+				 	</div>
+
 			<table class="table table-dark my-4 text-center">
 				<thead>
 					<tr>
@@ -38,39 +47,47 @@
 					{% endfor %}
 				</tbody>
 			</table>
+			{% endif %}
 		</div>
 
 		<div class="container">
 
 				<div class="row">
-				 <div class="col-auto mr-auto mt-5"><h2 >Events I Attended:</h2></div>
-			 </div>
-			<table class="table table-dark my-4 text-center">
-				<thead>
-					<tr>
-						<th scope="col">Title</th>
-						<th scope="col">Date</th>
-						<th scope="col">Time</th>
-						<th scope="col">Location</th>
-						<th scope="col">Tickects</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for attended in past_bookings %}
+					{% if not past_bookings %}
+						<div class="col-auto mr-auto mt-5"><h2 >No Events Attended, Book an Event and Enjoy the Experience!</h2></div>
+						<div class="col-auto"><a href="{% url 'event-list' %}" class="btn btn-dark btn-md rounded-pill mt-5">Book an Event</a></div>
+						{% else %}
+						<div class="col-auto mr-auto mt-5"><h2 >Events I Attended:</h2></div>
+				</div>
+				<table class="table table-dark my-4 text-center">
+					<thead>
 						<tr>
-							<th>{{attended.event.title}}</th>
-							<td>{{attended.event.date}}</td>
-							<td>{{attended.event.time}}</td>
-							<td>{{attended.event.location}}</td>
-							<td>{{attended.tickets}}</td>
+							<th scope="col">Title</th>
+							<th scope="col">Date</th>
+							<th scope="col">Time</th>
+							<th scope="col">Location</th>
+							<th scope="col">Tickects</th>
 						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{% for attended in past_bookings %}
+							<tr>
+								<th>{{attended.event.title}}</th>
+								<td>{{attended.event.date}}</td>
+								<td>{{attended.event.time}}</td>
+								<td>{{attended.event.location}}</td>
+								<td>{{attended.tickets}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
 		</div>
 	</div>
 
-
+<br>
+<br>
+<br>
 </header>
 
 

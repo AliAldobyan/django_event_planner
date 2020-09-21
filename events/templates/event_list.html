@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <header class="masthead text-left text-white">
 	<div class="masthead-content">
@@ -34,7 +34,7 @@
                   <td><a href="" class="btn btn-danger btn-sm rounded-pill " disabled>FULL</a></td>
                 {% else %}
                   <td><a href="" class="btn btn-success btn-sm rounded-pill ">View Details</a></td>
-                  <td><a href="" class="btn btn-primary btn-sm rounded-pill ">Book</a></td>
+                  <td><a href="{% url 'event-book' event.id %}" class="btn btn-primary btn-sm rounded-pill ">Book</a></td>
                 {% endif %}
 
 							{% endif %}
@@ -44,10 +44,7 @@
 			</table>
 		</div>
 	</div>
-
-
 </header>
-
 
 
 {% endblock %}
