@@ -28,11 +28,14 @@
 							<td>{{event.time}}</td>
 							<td>{{event.location}}</td>
 							<td>{{event.capacity}}</td>
-							<td>15</td>
+							<td>{{event.get_total_tickets}}</td>
 							{% if request.user.is_authenticated %}
-
+                {% if event.get_total_tickets == 0 %}
+                  <td><a href="" class="btn btn-danger btn-sm rounded-pill " disabled>FULL</a></td>
+                {% else %}
                   <td><a href="" class="btn btn-success btn-sm rounded-pill ">View Details</a></td>
                   <td><a href="" class="btn btn-primary btn-sm rounded-pill ">Book</a></td>
+                {% endif %}
 
 							{% endif %}
 						</tr>

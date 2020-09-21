@@ -7,9 +7,12 @@ urlpatterns = [
 	path('login/', views.Login.as_view(), name='login'),
 	path('logout/', views.Logout.as_view(), name='logout'),
 
-	path('dashboard/', views.Dashboard, name='dashboard'),
-	path('events/', views.EventList, name='event-list'),
-	path('create/event/', views.EventCreate, name='event-create'),
-	path('event/<int:event_id>/update/', views.EventUpdate, name='event-update'),
-	path('event/<int:event_id>/deletd/', views.EventDelete, name='event-delete'),
+	path('dashboard/', views.dashboard, name='dashboard'),
+
+	path('events/', views.event_list, name='event-list'),
+	path('events/<int:event_id>/', views.event_detail, name='event-detail'),
+
+	path('create/event/', views.event_create, name='event-create'),
+	path('event/<int:event_id>/update/', views.event_update, name='event-update'),
+	path('event/<int:event_id>/deletd/', views.event_delete, name='event-delete'),
 ]

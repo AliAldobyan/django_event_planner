@@ -11,26 +11,21 @@ def home(request):
 	return render(request, 'home.html')
 
 
-def Dashboard(request):
-	event_by_date = Event.objects.filter(date__gt = datetime.today())
+def dashboard(request):
 	events = Event.objects.filter(organizer = request.user)
-	bookings = Booking.objects.filter(user = request.user)
+	past_bookings = Booking.objects.filter(user = request.user, event__date__lt=datetime.today())
 	if request.user.is_anonymous:
 		redirect('login')
-	past_events = []
-	for books in bookings:
-		if books.event.date < datetime.today().date():
-			past_events.append(books
-			)
+
 	context = {
 	"events" : events,
-	"past_events": past_events,
+	"past_bookings": past_bookings,
 	}
 
 	return render(request,"dashboard.html",context)
 
 
-def EventList(request):
+def event_list(request):
 	events = Event.objects.filter(date__gt = datetime.today())
 
 	query = request.GET.get("q")
@@ -42,16 +37,22 @@ def EventList(request):
 		Q(date__icontains=query)
 		).distinct()
 
-	bookings = Booking.objects.filter(event=events)
-
 	context = {
 	"events" : events,
-	"bookings":bookings,
 	}
 	return render(request,'event_list.html',context)
 
 
-def EventCreate(request):
+def event_detail(request , event_id):
+    event = Event.objects.get(id = event_id)
+
+    context = {
+    "event" : event,
+    }
+    return render(request,'event_detail.html',context)
+
+
+def event_create(request):
 	if not request.user.is_authenticated:
 		return redirect('signin')
 	form = EventForm()
@@ -69,7 +70,7 @@ def EventCreate(request):
 	return render(request, 'event_create.html', context)
 
 
-def EventUpdate(request,event_id):
+def event_update(request,event_id):
 	event_obj = Event.objects.get(id=event_id)
 	if request.user != event_obj.organizer:
 		return redirect('login')
@@ -87,17 +88,13 @@ def EventUpdate(request,event_id):
 	return render(request, 'event_update.html', context)
 
 
-def EventDelete(request,event_id):
+def event_delete(request,event_id):
 	event = Event.objects.get(id = event_id)
 	if request.user != event.organizer:
 		return redirect('login')
 	event.delete()
 	messages.warning(request,"You have successfully Deleted An Event.")
 	return redirect('dashboard')
-
-
-# def EventDetail(request, event_id):
-
 
 
 class Signup(View):

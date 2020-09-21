@@ -28,7 +28,7 @@
 							<td>{{event.time}}</td>
 							<td>{{event.location}}</td>
 							<td>{{event.capacity}}</td>
-							<td>15</td>
+							<td>{{event.get_total_tickets}}</td>
 							{% if event.organizer == request.user %}
 								<td><a href="#" class="btn btn-primary btn-sm rounded-pill ">View</a></td>
 								<td><a href="{% url 'event-update' event.id %}" class="btn btn-success btn-sm rounded-pill ">Edit</a></td>
@@ -56,20 +56,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th>Test Event</th>
-						<td>2020-20-09</td>
-						<td>15:27</td>
-						<td>Riyadh</td>
-						<td>1</td>
-					</tr>
-					<tr>
-						<th>Test Event2</th>
-						<td>2020-20-09</td>
-						<td>15:27</td>
-						<td>Riyadh</td>
-						<td>2</td>
-					</tr>
+					{% for attended in past_bookings %}
+						<tr>
+							<th>{{attended.event.title}}</th>
+							<td>{{attended.event.date}}</td>
+							<td>{{attended.event.time}}</td>
+							<td>{{attended.event.location}}</td>
+							<td>{{attended.tickets}}</td>
+						</tr>
+					{% endfor %}
 				</tbody>
 			</table>
 		</div>

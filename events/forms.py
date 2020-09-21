@@ -20,7 +20,7 @@ class UserLogin(forms.Form):
 class EventForm(forms.ModelForm):
 	class Meta:
 		model = Event
-		fields = ['title','description', 'location','capacity', 'time', 'date']
+		exclude = ['organizer']
 
 		widgets = {
 			'time': forms.TimeInput(attrs={'type':'time'}),

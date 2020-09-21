@@ -14,18 +14,22 @@ class Event(models.Model):
 		return self.title
 
 
+	def get_total_tickets(self):
+		bookings = self.bookings.all()
+		number_of_tickets = 0
+		for book in  bookings:
+			number_of_tickets += book.tickets
+
+		return  self.capacity - number_of_tickets
+
+
 class Booking(models.Model):
 	event = models.ForeignKey(Event , on_delete = models.CASCADE, related_name='bookings')
 	user = models.ForeignKey(User , on_delete = models.CASCADE)
 	tickets = models.IntegerField()
 
-	def get_total_tickets(self):
-		bookings = self.bookings
-		number_of_tickets = 0
-		for book in  bookings:
-			number_of_tickets += book.tickets
-
-		return number_of_tickets
+	def __str__(self):
+		return f"{self.event.title} - {self.user.username}"
 
 
 class Profile(models.Model):
