@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from datetime import datetime
+from django.db.models import Q
 
 from .models import Event, Booking
 from .forms import UserSignup, UserLogin, EventForm, BookingForm
