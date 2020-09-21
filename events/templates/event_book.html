@@ -9,7 +9,13 @@
 				<form action="{% url 'event-book' event.id %}" method="POST" enctype="multipart/form-data">
 							{% csrf_token %}
 							{{form|crispy}}
-							<input type="submit" value="Book" class="btn btn-primary btn-xl btn-block rounded-pill mt-5">
+              {% if user_booking.user == request.user %}
+                <h4>You already have tickets for this Event!</h4>
+                <input type="submit" value="Back to List of Events" class="btn btn-primary btn-xl btn-block rounded-pill mt-5">
+              {% else %}
+                <input type="submit" value="Book" class="btn btn-primary btn-xl btn-block rounded-pill mt-5">
+              {% endif %}
+
 					</form>
 			</div>
 

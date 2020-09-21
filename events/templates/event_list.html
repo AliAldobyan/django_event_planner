@@ -8,18 +8,18 @@
 				<div class="row">
         {% if not events %}
            <div class="col-auto mr-auto"><h1>NO Events Found!</h1></div>
-           
+
            <div class="col-auto">
              <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2 rounded-pill" type="text" name='q' placeholder="Search...">
+              <input class="form-control mr-sm-2 rounded-pill" type="text" name='q' placeholder="Search for event...">
               <button class="btn btn-dark btn-lg rounded-pill " type="submit">Search</button>
             </form>
            </div>
         {% else %}
-				 <div class="col-auto mr-auto"><h1 >Events</h1></div>
+				 <div class="col-auto mr-auto"><h1>Events</h1></div>
          <div class="col-auto">
            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2 rounded-pill" type="text" name='q' placeholder="Search...">
+            <input class="form-control mr-sm-2 rounded-pill" type="text" name='q' placeholder="Search for event...">
             <button class="btn btn-dark btn-lg rounded-pill " type="submit">Search</button>
           </form>
          </div>
@@ -52,8 +52,8 @@
                 {% if event.get_total_tickets == 0 %}
                   <td><a href="" class="btn btn-danger btn-sm rounded-pill " disabled>FULL</a></td>
                 {% else %}
-                  <td><a href="" class="btn btn-success btn-sm rounded-pill ">View Details</a></td>
-                  <td><a href="{% url 'event-book' event.id %}" class="btn btn-primary btn-sm rounded-pill ">Book</a></td>
+                    <td><a href="{% url 'event-book' event.id %}" class="btn btn-primary btn-sm rounded-pill ">Book</a></td>
+                    <td><a href="" class="btn btn-success btn-sm rounded-pill ">View Details</a></td>
                 {% endif %}
 
 							{% endif %}
@@ -64,6 +64,10 @@
         {% endif %}
 		</div>
 	</div>
+  <div class="bg-circle-1 bg-circle"></div>
+  <div class="bg-circle-2 bg-circle"></div>
+  <div class="bg-circle-3 bg-circle"></div>
+  <div class="bg-circle-4 bg-circle"></div>
   <br>
   <br>
   <br>

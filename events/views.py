@@ -35,7 +35,8 @@ def event_list(request):
 		Q(title__icontains=query)|
 		Q(description__icontains=query)|
 		Q(organizer__username__icontains=query)|
-		Q(date__icontains=query)
+		Q(date__icontains=query)|
+		Q(location__icontains=query)
 		).distinct()
 
 	context = {
@@ -45,12 +46,12 @@ def event_list(request):
 
 
 def event_detail(request , event_id):
-    event = Event.objects.get(id = event_id)
+	event = Event.objects.get(id = event_id)
 
-    context = {
-    "event" : event,
-    }
-    return render(request,'event_detail.html',context)
+	context = {
+	"event" : event,
+	}
+	return render(request,'event_detail.html',context)
 
 
 def event_create(request):
@@ -72,28 +73,29 @@ def event_create(request):
 
 
 def event_book(request,event_id):
-    form = BookingForm()
-    event = Event.objects.get(id=event_id)
+	form = BookingForm()
+	event = Event.objects.get(id=event_id)
+	user_booking = Booking.objects.filter(event=event)
+	if request.user.is_anonymous:
+		return redirect('login')
 
-    if request.user.is_anonymous:
-        return redirect('login')
+	if request.method == "POST":
+		form = BookingForm(request.POST)
+		if form.is_valid():
+			booking = form.save(commit = False)
+			booking.user = request.user
+			booking.event= event
+			booking.save()
+			messages.success(request , "You Have Successfully Booked An Event.")
+			return redirect("event-list")
 
-    if request.method == "POST":
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            booking = form.save(commit = False)
-            booking.user = request.user
-            booking.event= event
-            booking.save()
-            messages.success(request , "You Have Successfully Booked An Event.")
-            return redirect("event-list")
+	context = {
+	"event" : event,
+	"form" :form,
+	"user_booking" : user_booking,
+	}
 
-    context = {
-    "event" : event,
-    "form" :form,
-    }
-
-    return render(request,'event_book.html',context)
+	return render(request,'event_book.html',context)
 
 
 def event_update(request,event_id):
@@ -161,8 +163,10 @@ class Login(View):
 			auth_user = authenticate(username=username, password=password)
 			if auth_user is not None:
 				login(request, auth_user)
+				if Event.objects.filter(organizer=auth_user).exists():
+					return redirect('dashboard')
 				messages.success(request, "Welcome Back!")
-				return redirect('home')
+				return redirect('event-list')
 			messages.warning(request, "Wrong email/password combination. Please try again.")
 			return redirect("login")
 		messages.warning(request, form.errors)
