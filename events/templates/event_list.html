@@ -38,7 +38,7 @@
 						<th scope="col">Time</th>
 						<th scope="col">Location</th>
 						<th scope="col">Capacity</th>
-						<th scope="col">Tickects Left</th>
+						<th scope="col">Tickets Left</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,7 +49,7 @@
 							<td>{{event.location}}</td>
 							<td>{{event.capacity}}</td>
               {% if event.get_total_tickets == 0 %}
-                <td>No Tickects left</td>
+                <td>No Tickets left</td>
                 {% else %}
                 <td>{{event.get_total_tickets}}</td>
 
