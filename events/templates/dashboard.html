@@ -42,7 +42,7 @@
 							<td>{{event.capacity}}</td>
 							<td>{{event.get_total_tickets}}</td>
 							{% if event.organizer == request.user %}
-								<td><a href="#" class="btn btn-primary btn-sm rounded-pill ">View</a></td>
+								<td><a href="{% url 'event-detail' event.id %}" class="btn btn-primary btn-sm rounded-pill ">View</a></td>
 								<td><a href="{% url 'event-update' event.id %}" class="btn btn-success btn-sm rounded-pill ">Edit</a></td>
 								<td><a href="{% url 'event-delete' event.id %}" class="btn btn-danger btn-sm rounded-pill ">Delete</a></td>
 							{% endif %}

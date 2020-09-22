@@ -47,9 +47,11 @@ def event_list(request):
 
 def event_detail(request , event_id):
 	event = Event.objects.get(id = event_id)
+	bookings = Booking.objects.filter(event=event)
 
 	context = {
 	"event" : event,
+	"bookings" : bookings
 	}
 	return render(request,'event_detail.html',context)
 
@@ -75,7 +77,6 @@ def event_create(request):
 def event_book(request,event_id):
 	form = BookingForm()
 	event = Event.objects.get(id=event_id)
-
 
 	try:
 		user_booking = Booking.objects.get(event=event, user=request.user)
@@ -105,7 +106,6 @@ def event_book(request,event_id):
 	"form" :form,
 	"user_booking" : user_booking,
 	}
-
 	return render(request,'event_book.html',context)
 
 

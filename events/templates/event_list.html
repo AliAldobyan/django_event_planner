@@ -30,7 +30,7 @@
        {% for event in events %}
 
 			<table class="table table-dark mb-5 text-center table-bordered table-striped table-hover " >
-        
+
 				<thead>
 					<tr>
             <h4 class="mt-5">{{event.title}}</h4>
@@ -60,7 +60,7 @@
                   <td><button type="button" class="btn btn-danger btn-sm rounded-pill" disabled>FULL</button></td>
                 {% else %}
                     <td><a href="{% url 'event-book' event.id %}" class="btn btn-primary btn-sm rounded-pill ">Book</a></td>
-                    <td><a href="" class="btn btn-success btn-sm rounded-pill ">View Details</a></td>
+                    <td><a href="{% url 'event-detail' event.id %}" class="btn btn-success btn-sm rounded-pill ">View Details</a></td>
                 {% endif %}
 
 							{% endif %}

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="masthead text-center text-white">
+	<div class="masthead-content">
+		<div class="container">
+			<h2 style="font-size:300%;">{{event.title}} Details</h2>
+		</div>
+
+		<div class="container mt-5">
+      <div class="jumbotron rounded" style="background-color:#A00650; !important">
+        <div class="row justify-content-around">
+          <div class="col-4">
+            <h2>Organizer:</h2>
+            <h5>{{event.organizer}}</h5>
+          </div>
+
+        </div>
+        <div class="row justify-content-around mt-5">
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+
+          </div>
+        </div>
+        <div class="row justify-content-around mt-4">
+          <div class="col-4">
+            <i class="far fa-clock fa-2x" > {{event.time}}</i>
+          </div>
+          <div class="col-4">
+            <i class="far fa-calendar-alt fa-2x"> {{event.date}}</i>
+          </div>
+        </div>
+        <div class="row justify-content-around mt-4">
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+
+          </div>
+        </div>
+        <div class="row justify-content-around mt-4">
+          <div class="col-4">
+            <i class="fas fa-map-marker-alt fa-2x"> {{event.location}}</i>
+          </div>
+          <div class="col-4">
+            <i class="fas fa-users fa-2x"> {{event.capacity}}</i>
+          </div>
+        </div>
+        <div class="row justify-content-around mt-4">
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+
+          </div>
+        </div>
+        <div class="row justify-content-around mt-5">
+          <div class="col-6">
+            <h2>Description of the Event:</h2>
+            <h5>{{event.description}}</h5>
+          </div>
+
+        </div>
+      </div>
+		</div>
+    {% if event.organizer == request.user %}
+
+      <div class="container">
+        <hr>
+        <table class="table table-dark mt-1 text-center table-bordered table-striped table-hover" >
+          <thead>
+            <tr>
+              <h2 class="mt-5 text-left">Information of people who booked tickets for your event:</h2>
+              <th scope="col">Username</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Tickects Booked</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for booking in bookings %}
+              <tr>
+
+                <td>{{booking.user}}</td>
+                <td>{{booking.user.first_name}}</td>
+                <td>{{booking.user.last_name}}</td>
+                <td>{{booking.user.email}}</td>
+                <td>{{booking.tickets}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+	</div>
+
+	<div class="bg-circle-1 bg-circle"></div>
+	<div class="bg-circle-2 bg-circle"></div>
+	<div class="bg-circle-3 bg-circle"></div>
+	<div class="bg-circle-4 bg-circle"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</header>
+
+
+
+
+
+
+
+
+
+{% endblock %}
