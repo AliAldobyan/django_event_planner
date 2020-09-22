@@ -75,7 +75,13 @@ def event_create(request):
 def event_book(request,event_id):
 	form = BookingForm()
 	event = Event.objects.get(id=event_id)
-	user_booking = Booking.objects.filter(event=event)
+
+
+	try:
+		user_booking = Booking.objects.get(event=event, user=request.user)
+	except Booking.DoesNotExist:
+		user_booking = None
+
 	if request.user.is_anonymous:
 		return redirect('login')
 
@@ -83,11 +89,16 @@ def event_book(request,event_id):
 		form = BookingForm(request.POST)
 		if form.is_valid():
 			booking = form.save(commit = False)
-			booking.user = request.user
-			booking.event= event
-			booking.save()
-			messages.success(request , "You Have Successfully Booked An Event.")
-			return redirect("event-list")
+
+			if booking.tickets > event.get_total_tickets():
+				messages.warning(request,"Sorry , No seats enough to book!")
+
+			else:
+				booking.user = request.user
+				booking.event= event
+				booking.save()
+				messages.success(request , "You Have Successfully Booked An Event.")
+				return redirect("event-list")
 
 	context = {
 	"event" : event,

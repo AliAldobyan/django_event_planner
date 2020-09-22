@@ -2,8 +2,11 @@
 
 {% block content %}
 <header class="masthead text-left text-white">
+	<div class="container text-center text-white mb-5">
+		<h1 class="masthead-heading mb-5" style="font-size:300%;">Dashboard</h1>
+	</div>
 	<div class="masthead-content">
-		<div class="container">
+		<div class="container mt-5">
 
 
 					<div class="row">
@@ -18,7 +21,7 @@
 
 				 	</div>
 
-			<table class="table table-dark my-4 text-center">
+			<table class="table table-dark my-3 text-center table-bordered table-striped table-hover" >
 				<thead>
 					<tr>
 						<th scope="col">Title</th>
@@ -54,12 +57,12 @@
 
 				<div class="row">
 					{% if not past_bookings %}
-						<div class="col-auto mr-auto mt-5"><h2 >No Events Attended, Book an Event and Enjoy the Experience!</h2></div>
+						<div class="col-auto mr-auto mt-5"><h2>No Events Attended, Book an Event!</h2></div>
 						<div class="col-auto"><a href="{% url 'event-list' %}" class="btn btn-dark btn-md rounded-pill mt-5">Book an Event</a></div>
-						{% else %}
+					{% else %}
 						<div class="col-auto mr-auto mt-5"><h2 >Events I Attended:</h2></div>
 				</div>
-				<table class="table table-dark my-4 text-center">
+				<table class="table table-dark my-4 text-center table-bordered table-striped table-hover">
 					<thead>
 						<tr>
 							<th scope="col">Title</th>
@@ -85,6 +88,16 @@
 		</div>
 	</div>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
