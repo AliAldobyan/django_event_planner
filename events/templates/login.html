@@ -4,8 +4,8 @@
 <header class="masthead text-center text-white">
   <div class="masthead-content">
     <div class="container">
-        <div class="jumbotron">
-          <h2 class="masthead-subheading mb-0">Log In</h2>
+        <div class="jumbotron jumbotron-primary">
+          <h2 class="masthead-subheading mb-4">Log In</h2>
           <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
             {{form|crispy}}

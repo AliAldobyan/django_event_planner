@@ -14,7 +14,7 @@ def home(request):
 
 def dashboard(request):
 	past_bookings = Booking.objects.filter(user = request.user, event__date__lt=datetime.today())
-	if request.user.is_anonymous:
+	if not request.user.is_authenticated:
 		redirect('login')
 
 	context = {

@@ -12,12 +12,12 @@
 					<div class="row">
 						{% if not request.user.events.all %}
 							<div class="col-auto mr-auto"><h2 >NO Events Organized by you, Join us and Create One!</h2></div>
-							<div class="col-auto"><a href="{% url 'event-create' %}" class="btn btn-dark btn-lg rounded-pill mt-1">Create Event</a></div>
+							<div class="col-auto"><a href="{% url 'event-create' %}" class="btn btn-primary btn-lg rounded-pill mt-1">Create Event</a></div>
 
 						{% else %}
 						 	<div class="col-auto mr-auto"><h2 >Events I Organized:</h2></div>
 
-						 <div class="col-auto"><a href="{% url 'event-create' %}" class="btn btn-dark btn-lg rounded-pill mt-1">Create Event</a></div>
+						 <div class="col-auto"><a href="{% url 'event-create' %}" class="btn btn-primary btn-lg rounded-pill mt-1">Create Event</a></div>
 
 				 	</div>
 
@@ -58,7 +58,7 @@
 				<div class="row">
 					{% if not past_bookings %}
 						<div class="col-auto mr-auto mt-5"><h2>No Events Attended, Book an Event!</h2></div>
-						<div class="col-auto"><a href="{% url 'event-list' %}" class="btn btn-dark btn-md rounded-pill mt-5">Book an Event</a></div>
+						<div class="col-auto"><a href="{% url 'event-list' %}" class="btn btn-primary btn-md rounded-pill mt-5">Book an Event</a></div>
 					{% else %}
 						<div class="col-auto mr-auto mt-5"><h2 >Events I Attended:</h2></div>
 				</div>

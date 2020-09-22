@@ -23,6 +23,9 @@ h6 {
 .bg-black {
   background-color: #000 !important;
 }
+.bg-blue{
+  background-color: #033954 !important;
+}
 
 .rounded-pill {
   border-radius: 5rem;
@@ -151,4 +154,15 @@ header.masthead .bg-circle-4 {
 
 .btn-secondary:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
+}
+
+.jumbotron-primary {
+  background: linear-gradient(0deg, #0895DB 0%, #033954 80%);
+  border-radius: 50px;
+}
+
+hr.hr5 {
+  border: 10px solid #066798;
+
+  border-radius: 50px;
 }

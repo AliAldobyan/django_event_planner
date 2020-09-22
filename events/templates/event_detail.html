@@ -8,15 +8,17 @@
 		</div>
 
 		<div class="container mt-5">
-      <div class="jumbotron rounded" style="background-color:#022E43; border-radius: 50px ; ">
+      <div class="jumbotron jumbotron-primary">
         <div class="row justify-content-around">
-          <div class="col-4">
-            <h3>Organizer:</h3>
-            <h5>{{event.organizer}}</h5>
+          <div class="col-12">
+            <h3>Organizer:   <small>{{ event.organizer}}</small></h3>
+
+
 
           </div>
 
         </div>
+        <hr class="hr5">
         <div class="row justify-content-around mt-5">
           <div class="col-4">
 
@@ -49,15 +51,22 @@
 
           </div>
           <div class="col align-self-center">
-            <div id='map' style='width: 700px; height: 380px;'></div>
+            <!--<div id='map' style='width: 700px; height: 380px;'></div>
               <script>
                 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxpLWliYXIiLCJhIjoiY2tmZHRoMnZqMXN1dzJ6cHBrYmtwNXV0NyJ9.s7kdZFWZUlyTQKPaiSG4VA';
                 var map = new mapboxgl.Map({
                   container: 'map',
                   style: 'mapbox://styles/mapbox/streets-v11'
                 });
-              </script>
+              </script>-->
+              <iframe
+                width="600"
+                height="450"
+                frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDXt75kiAEDY4HgvSBnRisLA11oHT4-hAA&q={{event.location}}" allowfullscreen>
+              </iframe>
           </div>
+
           <div class="col align-self-end">
 
           </div>
@@ -74,20 +83,20 @@
 
           </div>
         </div>
-
+        <hr class="hr5">
         <div class="row justify-content-around mt-5">
           <div class="col-12">
             <h3>Description of the Event:</h3>
-            <h5 style="text-align: left;">{{event.description}}</h5>
+            <h5 style="text-align: center;" class="mt-4">{{event.description}}</h5>
           </div>
 
         </div>
       </div>
 		</div>
-    {% if event.organizer == request.user %}
+    {% if event.organizer == request.user and event.bookings.all%}
 
       <div class="container">
-        <hr>
+        <hr >
         <table class="table table-dark mt-1 text-center table-bordered table-striped table-hover" >
           <thead>
             <tr>

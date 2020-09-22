@@ -5,7 +5,7 @@
 	<div class="masthead-content">
 		<div class="container">
 			<h1 class="masthead-heading mb-5">Update an Event</h1>
-			<div class="jumbotron">
+			<div class="jumbotron jumbotron-primary">
 				<form action="{% url 'event-update' event.id %}" method="POST" enctype="multipart/form-data">
 							{% csrf_token %}
 							{{form|crispy}}
