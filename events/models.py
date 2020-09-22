@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Event(models.Model):
-	organizer = models.ForeignKey(User, on_delete=models.CASCADE)
+	organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'events')
 	title = models.CharField(max_length=100)
 	description = models.TextField(blank=True)
 	time = models.TimeField()
@@ -16,9 +16,8 @@ class Event(models.Model):
 
 	def get_total_tickets(self):
 		bookings = self.bookings.all()
-		number_of_tickets = 0
-		for book in  bookings:
-			number_of_tickets += book.tickets
+		
+		number_of_tickets = sum([booking.tickets for booking in bookings])
 
 		return  self.capacity - number_of_tickets
 

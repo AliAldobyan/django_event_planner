@@ -13,13 +13,11 @@ def home(request):
 
 
 def dashboard(request):
-	events = Event.objects.filter(organizer = request.user)
 	past_bookings = Booking.objects.filter(user = request.user, event__date__lt=datetime.today())
 	if request.user.is_anonymous:
 		redirect('login')
 
 	context = {
-	"events" : events,
 	"past_bookings": past_bookings,
 	}
 
@@ -47,11 +45,9 @@ def event_list(request):
 
 def event_detail(request , event_id):
 	event = Event.objects.get(id = event_id)
-	bookings = Booking.objects.filter(event=event)
 
 	context = {
 	"event" : event,
-	"bookings" : bookings
 	}
 	return render(request,'event_detail.html',context)
 
