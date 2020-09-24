@@ -11,7 +11,8 @@
       <div class="jumbotron jumbotron-primary">
         <div class="row justify-content-around">
           <div class="col-12">
-            <h3>Organizer:   <small>{{ event.organizer}}</small></h3>
+
+            <h3>Organizer:  <a href="{% url 'profile' event.organizer.id %}"> <small>{{ event.organizer}}</small></a></h3>
 
 
 
@@ -82,38 +83,41 @@
           </div>
 
         </div>
+
+
+        {% if event.organizer == request.user and event.bookings.all%}
+
+          <div class="container mt-5">
+            <hr class="hr5">
+            <table class="table table-dark mt-1 text-center table-bordered table-striped table-hover" >
+              <thead>
+                <tr>
+                  <h2 class="mt-5 text-left">Information of people who booked tickets for your event:</h2>
+                  <th scope="col">Username</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Tickets Booked</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for  booking in event.bookings.all %}
+                  <tr>
+
+                    <td>{{booking.user}}</td>
+                    <td>{{booking.user.first_name}}</td>
+                    <td>{{booking.user.last_name}}</td>
+                    <td>{{booking.user.email}}</td>
+                    <td>{{booking.tickets}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
       </div>
 		</div>
-    {% if event.organizer == request.user and event.bookings.all%}
 
-      <div class="container">
-        <hr >
-        <table class="table table-dark mt-1 text-center table-bordered table-striped table-hover" >
-          <thead>
-            <tr>
-              <h2 class="mt-5 text-left">Information of people who booked tickets for your event:</h2>
-              <th scope="col">Username</th>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Tickets Booked</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for  booking in event.bookings.all %}
-              <tr>
-
-                <td>{{booking.user}}</td>
-                <td>{{booking.user.first_name}}</td>
-                <td>{{booking.user.last_name}}</td>
-                <td>{{booking.user.email}}</td>
-                <td>{{booking.tickets}}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    {% endif %}
 
 	</div>
 

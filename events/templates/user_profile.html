@@ -63,6 +63,38 @@
 
           </div>
         </div>
+
+
+        {% if events %}
+
+          <div class="container mt-5">
+            <hr class="hr5">
+            <table class="table table-dark mt-1 text-center table-bordered table-striped table-hover" >
+              <thead>
+                <tr>
+                  <h2 class="mt-5 text-left">Events Organized by {{profile.user.username}}</h2>
+                  <th scope="col">Title</th>
+    							<th scope="col">Date</th>
+    							<th scope="col">Time</th>
+    							<th scope="col">Location</th>
+    							<th scope="col">Capacity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for  event in events %}
+                  <tr>
+
+                    <th>{{event.title}}</th>
+    								<td>{{event.date}}</td>
+    								<td>{{event.time}}</td>
+    								<td>{{event.location}}</td>
+    								<td>{{event.capacity}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
       </div>
 		</div>
 

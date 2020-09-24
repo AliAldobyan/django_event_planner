@@ -148,11 +148,11 @@ def cancel_booking(request, booking_id):
 
 def profile(request, user_id):
 	profile = Profile.objects.get(user=user_id)
-	if profile.user != request.user:
-		return redirect('login')
+	events = Event.objects.filter(organizer_id=user_id)
 
 	context = {
-		"profile":profile
+		"profile":profile,
+		"events":events,
 	}
 	return render(request, 'user_profile.html', context)
 
