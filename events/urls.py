@@ -19,6 +19,8 @@ urlpatterns = [
 	path('event/<int:event_id>/book/', views.event_book, name='event-book'),
 	path('event/<int:event_id>/update/', views.event_update, name='event-update'),
 	path('event/<int:event_id>/deletd/', views.event_delete, name='event-delete'),
+	path('booking/<int:booking_id>/cancel/', views.cancel_booking, name='booking-cancel'),
+	path('profile/<int:user_id>/', views.profile, name='profile'),
 
 
 

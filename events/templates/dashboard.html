@@ -53,12 +53,11 @@
 			{% endif %}
 		</div>
 
-		<div class="container">
+		<div class="container mt-5">
 
 				<div class="row">
 					{% if not past_bookings %}
-						<div class="col-auto mr-auto mt-5"><h2>No Events Attended, Book an Event!</h2></div>
-						<div class="col-auto"><a href="{% url 'event-list' %}" class="btn btn-primary btn-md rounded-pill mt-5">Book an Event</a></div>
+
 					{% else %}
 						<div class="col-auto mr-auto mt-5"><h2 >Events I Attended:</h2></div>
 				</div>
@@ -80,6 +79,44 @@
 								<td>{{attended.event.time}}</td>
 								<td>{{attended.event.location}}</td>
 								<td>{{attended.tickets}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+		</div>
+
+		<div class="container mt-5">
+
+				<div class="row">
+					{% if not upcoming_bookings %}
+						<div class="col-auto mr-auto mt-5"><h2>No Upcoming Booked Events, Book an Event!</h2></div>
+						<div class="col-auto"><a href="{% url 'event-list' %}" class="btn btn-primary btn-md rounded-pill mt-5">Book an Event</a></div>
+					{% else %}
+						<div class="col-auto mr-auto mt-5"><h2 >Upcoming Booked Events:</h2></div>
+				</div>
+				<table class="table table-dark my-4 text-center table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Title</th>
+							<th scope="col">Date</th>
+							<th scope="col">Time</th>
+							<th scope="col">Location</th>
+							<th scope="col">Tickets</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for upcoming_booking in upcoming_bookings %}
+							<tr>
+								<th>{{upcoming_booking.event.title}}</th>
+								<td>{{upcoming_booking.event.date}}</td>
+								<td>{{upcoming_booking.event.time}}</td>
+								<td>{{upcoming_booking.event.location}}</td>
+								<td>{{upcoming_booking.tickets}}</td>
+								{% if upcoming_booking.user == request.user %}
+									<td><a href="{% url 'event-detail' upcoming_booking.event.id %}" class="btn btn-primary btn-sm rounded-pill ">View</a></td>
+									<td><a href="{% url 'booking-cancel' upcoming_booking.id %}" class="btn btn-danger btn-sm rounded-pill ">Cancel</a></td>								
+								{% endif %}
 							</tr>
 						{% endfor %}
 					</tbody>

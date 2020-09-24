@@ -129,8 +129,8 @@ header.masthead .bg-circle-4 {
 }
 
 .btn-primary {
-  background-color: #066798;
-  border-color: #066798;
+  background-color: #033954 !important;
+  border-color: #033954 !important;
 }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
@@ -157,12 +157,11 @@ header.masthead .bg-circle-4 {
 }
 
 .jumbotron-primary {
-  background: linear-gradient(0deg, #0895DB 0%, #033954 80%);
+  background: linear-gradient(0deg, #0895DB 0%, #033954 70%);
   border-radius: 50px;
 }
 
 hr.hr5 {
   border: 10px solid #066798;
-
   border-radius: 50px;
 }

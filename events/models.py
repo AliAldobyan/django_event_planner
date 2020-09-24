@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Event(models.Model):
 	organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'events')
@@ -16,7 +18,7 @@ class Event(models.Model):
 
 	def get_total_tickets(self):
 		bookings = self.bookings.all()
-		
+
 		number_of_tickets = sum([booking.tickets for booking in bookings])
 
 		return  self.capacity - number_of_tickets
@@ -36,3 +38,10 @@ class Profile(models.Model):
 
 	def __str__(self):
 		return str(self.user)
+
+
+@receiver(post_save, sender=User)
+def update_profile_signal(sender, instance, created, **kwargs):
+	if created:
+		Profile.objects.create(user=instance)
+	instance.profile.save()

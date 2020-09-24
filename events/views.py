@@ -3,10 +3,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from datetime import datetime
+from django.utils import timezone
 from django.db.models import Q
 
-from .models import Event, Booking
-from .forms import UserSignup, UserLogin, EventForm, BookingForm
+
+from .models import Event, Booking, Profile
+from .forms import UserSignup, UserLogin, EventForm, BookingForm,ProfileForm
 
 def home(request):
 	return render(request, 'home.html')
@@ -14,11 +16,14 @@ def home(request):
 
 def dashboard(request):
 	past_bookings = Booking.objects.filter(user = request.user, event__date__lt=datetime.today())
+	upcoming_bookings = Booking.objects.filter(user = request.user, event__date__gt=datetime.today())
+
 	if not request.user.is_authenticated:
 		redirect('login')
 
 	context = {
 	"past_bookings": past_bookings,
+	"upcoming_bookings": upcoming_bookings,
 	}
 
 	return render(request,"dashboard.html",context)
@@ -91,6 +96,7 @@ def event_book(request,event_id):
 				messages.warning(request,"Sorry , No seats enough to book!")
 
 			else:
+
 				booking.user = request.user
 				booking.event= event
 				booking.save()
@@ -131,6 +137,25 @@ def event_delete(request,event_id):
 	return redirect('dashboard')
 
 
+def cancel_booking(request, booking_id):
+	booking = Booking.objects.get(id=booking_id)
+	if request.user != booking.user:
+		return redirect('login')
+
+	booking.delete()
+	return redirect('dashboard')
+
+
+def profile(request, user_id):
+	profile = Profile.objects.get(user=user_id)
+	if profile.user != request.user:
+		return redirect('login')
+
+	context = {
+		"profile":profile
+	}
+	return render(request, 'user_profile.html', context)
+
 class Signup(View):
 	form_class = UserSignup
 	template_name = 'signup.html'
@@ -141,6 +166,7 @@ class Signup(View):
 
 	def post(self, request, *args, **kwargs):
 		form = self.form_class(request.POST)
+
 		if form.is_valid():
 			user = form.save(commit=False)
 			user.set_password(user.password)

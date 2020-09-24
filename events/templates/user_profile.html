@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="masthead text-center text-white">
+	<div class="masthead-content">
+		<div class="container">
+			<h2 style="font-size:300%;">{{profile.user.username}} Profile</h2>
+		</div>
+
+		<div class="container mt-5">
+      <div class="jumbotron jumbotron-primary">
+        <div class="row justify-content-around">
+          <div class="col-12">
+            <h3>User:   <small>{{ profile.user.username}}</small></h3>
+
+
+
+          </div>
+
+        </div>
+        <hr class="hr5">
+        <div class="row justify-content-around mt-5">
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              <i class="fas fa-user fa-2x"> </i><h4 class="mt-2">{{profile.user.first_name}}</h4>
+          </div>
+          <div class="col">
+            <i class="fas fa-user fa-2x" > </i><h4 class="mt-2">{{profile.user.last_name}}</h4>
+          </div>
+          <div class="col">
+            <i class="far fa-envelope fa-2x"> </i><h4 class="mt-2">{{profile.user.email}}</h4>
+          </div>
+        </div>
+        <div class="row justify-content-around mt-4">
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+
+          </div>
+        </div>
+        <div class="row  mt-4">
+          <div class="col align-self-start">
+
+          </div>
+
+
+        </div>
+
+
+        <div class="row justify-content-around mt-4">
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+
+          </div>
+        </div>
+      </div>
+		</div>
+
+	</div>
+
+	<div class="bg-circle-1 bg-circle"></div>
+	<div class="bg-circle-2 bg-circle"></div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</header>
+
+
+
+
+
+
+
+
+
+{% endblock %}

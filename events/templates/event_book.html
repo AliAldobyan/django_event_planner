@@ -5,10 +5,10 @@
 	<div class="masthead-content">
 		<div class="container">
       <div class="col-auto mr-auto mb-5"><h1>Book A Ticket for {{event.title}}</h1></div>
-			<div class="jumbotron jumbotron-primary">
+			<div class="jumbotron jumbotron-primary mt-5">
         {% if user_booking.user == request.user %}
           <h3>You have already booked tickets for this event!</h3>
-          <a href="{% url 'event-list' %}" class="btn btn-primary btn-xl btn-block rounded-pill mt-5">Back to List of Events</a>
+          <a href="{% url 'event-list' %}" class="btn btn-primary btn-xl  rounded-pill mt-5">Back to List of Events</a>
         {% else %}
     				<form action="{% url 'event-book' event.id %}" method="POST" enctype="multipart/form-data">
     						{% csrf_token %}
