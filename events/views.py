@@ -30,7 +30,7 @@ def dashboard(request):
 
 
 def event_list(request):
-	events = Event.objects.filter(date__gt = datetime.today())
+	events = Event.objects.filter(date__gt = datetime.today()).order_by('date')
 
 	query = request.GET.get("q")
 	if query:
